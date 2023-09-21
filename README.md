@@ -6,6 +6,10 @@ You will be prompted to enter an OpenAI API Key, to use the plugin, which is sto
 
 There are currently two menu items 1) JavaDocs and 2) General Questions. See usage below.
 
+## Note:
+
+This extension is not yet available in the `VSCode Extension Marketplace`, because it is in pre-alpha stage developmen, but it does work perfectly and is already in a near-production ready state. 
+
 ## Usage
 
 ### JavaDocs Generation
