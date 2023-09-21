@@ -1,6 +1,10 @@
-# GPTools
+# GPTools - VSCode Extension for ChatGPT
 
-This is a VSCode extension for making calls to OpenAI GPT to get infomration related to the selected text in the editor. Use the menu items available in the Right-Click to run the commands.
+This is a VSCode extension for making calls to OpenAI GPT to get information related based on the selected text in the editor. The extension adds menu items to the right-click menu on the editor, which can do GPT-related queries.
+
+You will be prompted to enter an OpenAI API Key, to use the plugin, which is stored securely in your VSCode plugin.
+
+There are currently two menu items 1) JavaDocs and 2) General Questions. See usage below.
 
 ## Usage
 
