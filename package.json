@@ -1,0 +1,63 @@
+{
+  "name": "gptools",
+  "displayName": "GPTools",
+  "description": "OpenAI GPT tools for VSCode",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.82.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "gptools.genJavaDocs",
+        "title": "Generate JavaDocs"
+      },
+      {
+        "command": "gptools.generalPrompt",
+        "title": "General Prompt"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "gptools.genJavaDocs",
+          "group": "1_insert",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "gptools.generalPrompt",
+          "group": "1_insert",
+          "when": "editorHasSelection"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.82.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
+    "@vscode/test-electron": "^2.3.4",
+    "eslint": "^8.47.0",
+    "glob": "^10.3.3",
+    "mocha": "^10.2.0",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "axios": "^1.5.0"
+  }
+}
