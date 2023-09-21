@@ -31,11 +31,23 @@ export async function activate(context: vscode.ExtensionContext) {
 	}
 
 	addMenuCommand(context, "gptools.genJavaDocs", () => {
-		generateJavaDocs(context);
+		executeWithProgress(() => generateJavaDocs(context));
 	});
 
 	addMenuCommand(context, "gptools.generalPrompt", () => {
-		generalPrompt(context);
+		executeWithProgress(() => generalPrompt(context));
+	});
+}
+
+function executeWithProgress(callback: () => void) {
+	vscode.window.withProgress({
+		location: vscode.ProgressLocation.Notification,
+		title: "Processing. Do not edit file now. Please wait...",
+		cancellable: true
+	}, async (progress, token) => {
+		progress.report({ increment: 0 });
+		await callback();
+		progress.report({ increment: 100 });
 	});
 }
 
@@ -76,12 +88,13 @@ async function generalPrompt(context: vscode.ExtensionContext) {
 		const selText = editor.document.getText(selection);
 
 		const req = new ChatGPTRequest();
-		// req.messages.push({ role: "system", content: "You are an experienced Java developer" });
+		// Note: We intentionally don't provide a system prompt here
 		req.messages.push({ role: "user", content: selText });
 
 		const answer = await askGpt(context, req);
 		const position = editor.selection.end.translate(1, 0);
 
+		// Insesrt below selected text
 		editor.edit(editBuilder => {
 			editBuilder.insert(position, "\n\nGPT: " + answer + "\n");
 		});
